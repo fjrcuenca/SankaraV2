@@ -1,0 +1,42 @@
+<?php
+// Fill up array with names
+
+include('config.php');
+
+$qry = mysql_query('SELECT role_no, lastname, firstname from students order by lastname');
+$a = array();
+while($rows = mysql_fetch_array($qry)) {
+	$a[] = $rows['role_no']. ": " .$rows['lastname']. ", " .$rows['firstname'];
+}
+
+
+//get the q parameter from URL
+$q=$_GET["q"];//lookup all hints from array if length of q>0
+
+if (strlen($q) > 0) {
+  	$hint="";
+	for($i=0; $i<count($a); $i++) {
+  		if (strtolower($q)==strtolower(substr($a[$i],0,strlen($q)))) {
+    			if ($hint=="") {
+      				$hint=$a[$i];
+      			}
+    			else{
+      				$hint= $hint. "<li class='item' ng-click='viewStudentProfile()'>" .$a[$i]. "</li>" ;
+      			}
+    		}
+  	}
+}
+
+// Set output to "no suggestion" if no hint was found
+// or to the correct values
+if ($hint == ""){
+	$response="<li class='item'> No Suggestion </li>";
+}
+else {
+	$response= "<li class='item' ng-click='viewStudentProfile()'>" .$hint. "</li>";
+}
+
+//output the response
+echo $response;
+?>
+

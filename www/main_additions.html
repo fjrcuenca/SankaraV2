@@ -1,0 +1,273 @@
+<!-- 
+ *
+ *
+ *
+ * ------------ Added to main.html ------------
+ *
+ *
+ *
+ -->
+
+<!-- Search Camp div -->
+<!--
+	Searches database by camp name.
+	Uses Auto-Complete to search for camp name
+-->	
+
+	<script id="templates/search_camp.html" type="text/ng-template">
+		<ion-view class="search-background" view-title="Sankara Eye Records">
+		
+			<ion-nav-buttons side="left">
+				<a class="button" animation="slide-right-left" ng-click="goSearchBy()"> <!-- Button to go to search_by -->
+					<i class="icon ion-arrow-left-c"></i> BACK
+				</a>
+			</ion-nav-buttons>
+		
+			<ion-header-bar id="header" type="bar-primary" hides-header>
+			</ion-header-bar>
+			
+			<ion-nav-buttons side="right">
+				<a class="button" ng-click="goToAddScreeningSiteSelection()">			<!-- Create Function for adding profile -->
+				<i class="icon ion-plus-round"></i>										<!-- Could be school, camp, or anganwandi -->
+				</a>
+			</ion-nav-buttons>
+			<ion-content padding="true" has-tabs="true" has-header="true">
+				<div id="search-box" class="item-input-wrapper">
+					<i class="icon ion-ios7-search placeholder-icon"></i>
+					<input id="search-box" type="text"
+					onkeyup="showHint(this.value)"
+					class="item-input-wrapper" 
+					placeholder="Search Camp Name" 
+					ng-model="data.searchQuery" reset-field>
+				</div>
+				<div class="list" id="suggestions">
+					<span id="txtHint" ng-click="viewSchoolProfile()"> </span>
+				</div>
+			</ion-content>
+		</ion-view>
+	</script>
+	
+<!-- End Search Camp div -->
+
+<!-- Search Anganwandi div -->
+<!--
+	Searches database by anganwandi name.
+	Uses Auto-Complete to search for camp name
+-->	
+
+	<script id="templates/search_anganwandi.html" type="text/ng-template">
+		<ion-view class="search-background" view-title="Sankara Eye Records">
+		
+			<ion-nav-buttons side="left">
+				<a class="button" animation="slide-right-left" ng-click="goSearchBy()"> <!-- Button to go to search_by -->
+					<i class="icon ion-arrow-left-c"></i> BACK
+				</a>
+			</ion-nav-buttons>
+
+			<ion-header-bar id="header" type="bar-primary" hides-header>
+			</ion-header-bar>
+			
+			<ion-nav-buttons side="right">
+				<a class="button" ng-click="goToAddScreeningSiteSelection()">			<!-- Create Function for adding profile -->
+				<i class="icon ion-plus-round"></i>										<!-- Could be school, camp, or anganwandi -->
+				</a>
+			</ion-nav-buttons>
+			<ion-content padding="true" has-tabs="true" has-header="true">
+				<div id="search-box" class="item-input-wrapper">
+					<i class="icon ion-ios7-search placeholder-icon"></i>
+					<input id="search-box" type="text"
+					onkeyup="showHint(this.value)"
+					class="item-input-wrapper" 
+					placeholder="Search Anganwandi Name" 
+					ng-model="data.searchQuery" reset-field>
+				</div>
+				<div class="list" id="suggestions">
+					<span id="txtHint" ng-click="viewAnganwandiProfile()"> </span>
+				</div>
+			</ion-content>
+		</ion-view>
+	</script>
+	
+<!-- End Search Anganwandi div -->
+
+<!-- Search Screening Date div -->
+<!--
+	Searches database by screen date.
+	Uses Auto-Complete to search for camp name
+-->	
+
+	<script id="templates/search_screen_date.html" type="text/ng-template">
+		<ion-view class="search-background" view-title="Sankara Eye Records">
+		
+			<ion-nav-buttons side="left">
+				<a class="button" animation="slide-right-left" ng-click="goSearchBy()"> <!-- Button to go to search_by -->
+					<i class="icon ion-arrow-left-c"></i> BACK
+				</a>
+			</ion-nav-buttons>
+			
+			<ion-header-bar id="header" type="bar-primary" hides-header>
+			</ion-header-bar>
+			
+			<ion-nav-buttons side="right">
+				<a class="button" ng-click="goToAddScreeningSiteSelection()">			<!-- Create Function for adding profile -->
+				<i class="icon ion-plus-round"></i>										<!-- Could be school, camp, or anganwandi -->
+				</a>
+			</ion-nav-buttons>
+			<ion-content padding="true" has-tabs="true" has-header="true">
+				<div id="search-box" class="item-input-wrapper">
+					<i class="icon ion-ios7-search placeholder-icon"></i>
+					<input id="search-box" type="text"
+					onkeyup="showHint(this.value)"
+					class="item-input-wrapper" 
+					placeholder="Search Screening Date" 
+					ng-model="data.searchQuery" reset-field>
+				</div>
+				<div class="list" id="suggestions">
+					<span id="txtHint" ng-click="viewProfile()"> </span>
+				</div>
+			</ion-content>
+		</ion-view>
+	</script>
+	
+<!-- End Search Screening Date div -->
+
+<!-- 
+ *
+ * User selects if they want to add School, Camp, or Anganwandi Profile
+ *
+-->
+
+	<script id="templates/add_screening_site_selection.html" type="text/ng-template">
+		<ion-view view-title="Select Screening Site">
+			<ion-content padding="true">
+				<button class="button button-full button-positive main" ng-click="addSchoolProfile()">
+					Add School
+				</button>
+				<button class="button button-full button-positive main" ng-click="addCampProfile()" >
+					Add Camp
+				</button>
+				<button class="button button-full button-positive main" ng-click="addAnganwandiProfile()">
+					Add Anganwandi
+				</button>
+			</ion-content>
+		</ion-view>
+    </script>	
+<!-- End screening site selection div -->	
+
+	
+<!-- Add Camp Profile Template -->
+
+    <script id="templates/add_camp_profile.html" type="text/ng-template" >
+		<ion-view title="Add Camp Profile" >
+			<ion-content has-header="true">
+				<form name="add_camp" ng-submit="campSubmit(data)">
+					<div class="item item-divider">
+						<label class="item item-input">
+							<input type="text" name="camp_name" placeholder="Camp Name" ng-model="data.camp_name"> 
+							<button class="button button-icon icon ion-mic-a" ng-click="campCancel()"></button> &nbsp &nbsp
+						</label>            
+					</div>
+					<label class="item item-input">
+						<input type="text" name="screening_date" placeholder="Date of Screening" ng-model="data.screening_date">
+						<button class="button button-icon icon ion-mic-a"></button> &nbsp
+					</label>
+					<label class="item item-input">
+						<input type="text" name="address" placeholder="Screening Site Address" ng-model="data.address">
+						<button class="button button-icon icon ion-mic-a"></button> &nbsp
+					</label>
+					<label class="item item-input">
+						<input type="text" name="phone" placeholder="Phone Number" ng-model="data.phone">
+						<button class="button button-icon icon ion-mic-a"></button> &nbsp
+					</label>
+					<label class="item item-input">
+						<input type="text" name="cosponsor" placeholder="Co Sponsor Name" ng-model="data.cosponsor">
+						<button class="button button-icon icon ion-mic-a"></button> &nbsp
+					</label>
+					<label class="item item-input">
+						<input type="text" name="cosponsor_phone" placeholder="Co Sponsor Phone Number" ng-model="data.cosponsor_phone">
+						<button class="button button-icon icon ion-mic-a"></button> &nbsp
+					</label>
+					<label class="item item-input">
+						<input type="text" name="person_in_charge" placeholder="Person in Charge Name" ng-model="data.person_in_charge">
+						<button class="button button-icon icon ion-mic-a"></button> &nbsp
+					</label>
+					<label class="item item-input">
+						<input type="text" name="person_in_charge_phone" placeholder="Person in Charge Phone Number" ng-model="data.person_in_charge_phone">
+						<button class="button button-icon icon ion-mic-a"></button> &nbsp
+					</label>
+
+					<button class="button button-full button-positive"  name="submit_camp" type="submit">Add Camp</button>
+				</form>
+				<button class="button button-full button-assertive" ng-click="campCancel()">Cancel </button>	
+			</ion-content>
+		</ion-view>
+    </script>
+	
+<!-- End Add Camp Profile Template -->
+
+<!-- Add Anganwandi Profile Template -->
+
+    <script id="templates/add_anganwandi_profile.html" type="text/ng-template">
+		<ion-view title="Add Anganwandi Profile" >
+			<ion-content has-header="true">
+				<form name="add_anganwandi" ng-submit="anganwandiSubmit(data)">
+					<div class="item item-divider">
+						<label class="item item-input">
+							<input type="text" name="anganwandi_name" placeholder="Anganwandi Name" ng-model="data.anganwandi_name"> 
+							<button class="button button-icon icon ion-mic-a" ng-click="angwanwandiCancel()"></button> &nbsp &nbsp
+						</label>            
+					</div>
+					<label class="item item-input">
+						<input type="text" name="screening_date" placeholder="Date of Screening" ng-model="data.screening_date">
+						<button class="button button-icon icon ion-mic-a"></button> &nbsp
+					</label>
+					<label class="item item-input">
+						<input type="text" name="headmaster" placeholder="Headmaster Name" ng-model="data.headmaster">
+						<button class="button button-icon icon ion-mic-a"></button> &nbsp
+					</label>
+					<label class="item item-input">
+						<input type="text" name="address" placeholder="Screening Site Address" ng-model="data.address">
+						<button class="button button-icon icon ion-mic-a"></button> &nbsp
+					</label>
+					<label class="item item-input">
+						<input type="text" name="phone" placeholder="Phone Number" ng-model="data.phone">
+						<button class="button button-icon icon ion-mic-a"></button> &nbsp
+					</label>
+					<label class="item item-input">
+						<input type="text" name="cosponsor" placeholder="Co Sponsor Name" ng-model="data.cosponsor">
+						<button class="button button-icon icon ion-mic-a"></button> &nbsp
+					</label>
+					<label class="item item-input">
+						<input type="text" name="cosponsor_phone" placeholder="Co Sponsor Phone Number" ng-model="data.cosponsor_phone">
+						<button class="button button-icon icon ion-mic-a"></button> &nbsp
+					</label>
+					<label class="item item-input">
+						<input type="text" name="person_in_charge" placeholder="Person in Charge Name" ng-model="data.person_in_charge">
+						<button class="button button-icon icon ion-mic-a"></button> &nbsp
+					</label>
+					<label class="item item-input">
+						<input type="text" name="person_in_charge_phone" placeholder="Person in Charge Phone Number" ng-model="data.person_in_charge_phone">
+						<button class="button button-icon icon ion-mic-a"></button> &nbsp
+					</label>
+
+					<button class="button button-full button-positive"  name="submit_camp" type="submit">Add Angwanwandi</button>
+				</form>
+				<button class="button button-full button-assertive" ng-click="anganwandiCancel()">Cancel </button>	
+			</ion-content>
+		</ion-view>
+    </script>
+	
+<!-- End Add Anganwandi Profile Template -->
+
+	
+<!--
+ *
+ *
+ *
+ * -------------------- EDITS -------------------------
+ *
+ *
+ *
+ -->
+
+ 
